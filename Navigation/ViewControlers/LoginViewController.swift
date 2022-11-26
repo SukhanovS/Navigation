@@ -154,9 +154,9 @@ class LoginViewController: UIViewController {
 
         // если мы в дебаг версии то меняем цвет фона, иначе оставляем все как было
         #if DEBUG
-        let userLogin = TestUserService(user: User(login: "loginTest", fullName: "Test", status: "...", avatar: UIImage(named: "avatarTest") ?? UIImage()))
+        let userLogin = TestUserService(user: User(login: "loginTest", fullName: "Test Testov", status: "...", avatar: UIImage(named: "avatarTest") ?? UIImage()))
         #else
-            let userLogin = CurrentUserService(user: User(login: "loginProd", fio: "Prod", avatar: UIImage(named: "avatarProd") ?? UIImage(), status: "App Not Found..."))
+            let userLogin = CurrentUserService(user: User(login: "loginProd", fio: "Prod Prodov", avatar: UIImage(named: "avatarProd") ?? UIImage(), status: "App Not Found..."))
         #endif
 
         if userLogin.checkUser(login: enteredUserLogin ?? "") != nil {
