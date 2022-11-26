@@ -141,6 +141,18 @@ class ProfileHeaderView: UIView {
         
     }
     
+    @objc func statusTextChanged(_ textField: UITextField){
+        if let text = textField.text {
+            statusText = text
+        }
+    }
+
+    func setup(user : User){
+        fullNameLabel.text = user.fullName
+        statusLabel.text = user.status
+        avatarImageView.image = user.avatar
+    }
+    
     
 }
 

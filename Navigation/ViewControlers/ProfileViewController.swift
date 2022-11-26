@@ -12,7 +12,7 @@ import StorageService
 
 class ProfileViewController: UIViewController{
     
-    
+    var user_1 : User = User(login: "email", fullName: "Stas Sukhanov", status: "status...", avatar: UIImage(named: "кот") ?? UIImage())
     
     lazy private var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
@@ -35,6 +35,8 @@ class ProfileViewController: UIViewController{
         view.addSubview(tableView)
         //                layout()
         addConstraints()
+        
+        
         
 #if DEBUG
         view.backgroundColor = .systemRed
@@ -72,7 +74,9 @@ extension ProfileViewController : UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == 0 {
-            return ProfileHeaderView()
+            let profile = ProfileHeaderView()
+            profile.setup(user: user_1)
+                       return profile
         }
         return nil
     }

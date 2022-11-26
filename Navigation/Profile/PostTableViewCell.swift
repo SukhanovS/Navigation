@@ -81,6 +81,7 @@ class PostTableViewCell: UITableViewCell {
     }
     
     func setup(with viewModel: ViewModel) {
+        
         self.autor.text = viewModel.autor
         self.descriptionText.text = viewModel.descriptionText
         self.likes.text = viewModel.likes

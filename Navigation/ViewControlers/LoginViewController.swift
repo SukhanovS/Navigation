@@ -10,6 +10,8 @@ import UIKit
 
 class LoginViewController: UIViewController {
     
+    let alertController = UIAlertController(title: "Ошибка!", message: "Не правильный логин", preferredStyle: .alert)
+    
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -125,6 +127,9 @@ class LoginViewController: UIViewController {
         addViews()
         addConstraints()
         
+        alertController.addAction(UIAlertAction(title: "Повторить", style: .default))
+    
+        
     }
     
     func addViews() {
@@ -143,9 +148,26 @@ class LoginViewController: UIViewController {
     
     //нажатие кнопки логин
     @objc func login() {
-        let profileViewController = ProfileViewController()
-        navigationController?.pushViewController(profileViewController, animated: true)
+
+        // берем то что вводит пользователь в поле "email"
+        let enteredUserLogin = email.text
+
+        // если мы в дебаг версии то меняем цвет фона, иначе оставляем все как было
+        #if DEBUG
+        let userLogin = TestUserService(user: User(login: "loginTest", fullName: "Test", status: "...", avatar: UIImage(named: "avatarTest") ?? UIImage()))
+        #else
+            let userLogin = CurrentUserService(user: User(login: "loginProd", fio: "Prod", avatar: UIImage(named: "avatarProd") ?? UIImage(), status: "App Not Found..."))
+        #endif
+
+        if userLogin.checkUser(login: enteredUserLogin ?? "") != nil {
+            let profileViewController = ProfileViewController()
+            profileViewController.user_1 = userLogin.user
+            navigationController?.pushViewController(profileViewController, animated: true)
+        } else {
+            self.present(alertController, animated: true, completion: nil)
+        }
     }
+
     
     
     override func viewWillAppear(_ animated: Bool) {
