@@ -10,6 +10,8 @@ import UIKit
 
 class LoginViewController: UIViewController {
     
+    var loginDelegate: LoginViewControllerDelegate?
+    
     let alertController = UIAlertController(title: "Ошибка!", message: "Не правильный логин", preferredStyle: .alert)
     
     private lazy var scrollView: UIScrollView = {
@@ -151,15 +153,16 @@ class LoginViewController: UIViewController {
 
         // берем то что вводит пользователь в поле "email"
         let enteredUserLogin = email.text
+        let enteredUserPassword = password.text
 
         // если мы в дебаг версии то меняем цвет фона, иначе оставляем все как было
         #if DEBUG
-        let userLogin = TestUserService(user: User(login: "loginTest", fullName: "Test", status: "...", avatar: UIImage(named: "avatarTest") ?? UIImage()))
+        let userLogin = TestUserService(user: User(fullName: "Test", status: "...", avatar: UIImage(named: "avatarTest") ?? UIImage()))
         #else
-            let userLogin = CurrentUserService(user: User(login: "loginProd", fio: "Prod", avatar: UIImage(named: "avatarProd") ?? UIImage(), status: "App Not Found..."))
+            let userLogin = CurrentUserService(user: User(fullname: "Prod", avatar: UIImage(named: "avatarProd") ?? UIImage(), status: "App Not Found..."))
         #endif
 
-        if userLogin.checkUser(login: enteredUserLogin ?? "") != nil {
+        if loginDelegate?.check(self, login: enteredUserLogin ?? "", password: enteredUserPassword ?? "") == true {
             let profileViewController = ProfileViewController()
             profileViewController.user_1 = userLogin.user
             navigationController?.pushViewController(profileViewController, animated: true)

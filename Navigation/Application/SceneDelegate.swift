@@ -26,7 +26,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window.rootViewController = tabBarController
         window.makeKeyAndVisible()
         self.window = window
+        
+        let loginVC = LoginViewController()
+        //        loginVC.loginDelegate = LoginInspector()
+        
+        loginVC.loginDelegate = MyLoginFactory().makeLoginInspector()
     }
+    
     
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.

@@ -14,44 +14,30 @@ protocol UserService {
 
 class User {
     
-    let login: String
     let fullName: String
     let status: String
     let avatar: UIImage
     
-    init(login: String, fullName: String, status: String, avatar: UIImage) {
-        self.login = login
+    init(fullName: String, status: String, avatar: UIImage) {
         self.fullName = fullName
         self.status = status
         self.avatar = avatar
     }
 }
     
-    class TestUserService : UserService {
+    class TestUserService {
         let user : User
-        
-        func checkUser(login: String) -> User? {
-            if user.login == login {
-                return user
-            }
-            return nil
-        }
         
         init(user: User) {
             self.user = user
         }
     }
     
-    class CurrentUserService: UserService {
+    class CurrentUserService {
         
         let user: User
         
-        func checkUser(login: String) -> User? {
-            if user.login == login {
-                return user
-            }
-            return user
-        }
+           
         
         init(user: User) {
             self.user = user

@@ -12,7 +12,7 @@ import StorageService
 
 class ProfileViewController: UIViewController{
     
-    var user_1 : User = User(login: "email", fullName: "Stas Sukhanov", status: "status...", avatar: UIImage(named: "кот") ?? UIImage())
+    var user_1 : User = User(fullName: "", status: "", avatar: UIImage())
     
     lazy private var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)

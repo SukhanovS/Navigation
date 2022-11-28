@@ -29,6 +29,7 @@
 		D9E2D44228AA8B1900C4C09B /* TabbarControler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9E2D44128AA8B1900C4C09B /* TabbarControler.swift */; };
 		D9E2D44428AA8F0200C4C09B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9E2D44328AA8F0200C4C09B /* ViewController.swift */; };
 		D9E2D44828AA911000C4C09B /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9E2D44728AA911000C4C09B /* FeedViewController.swift */; };
+		D9FA99E429336230006A69C3 /* Checker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9FA99E329336230006A69C3 /* Checker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +80,7 @@
 		D9E2D44128AA8B1900C4C09B /* TabbarControler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarControler.swift; sourceTree = "<group>"; };
 		D9E2D44328AA8F0200C4C09B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		D9E2D44728AA911000C4C09B /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
+		D9FA99E329336230006A69C3 /* Checker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +120,7 @@
 				D9C10BAC29158A2B0065A55F /* PhotosCollectionViewCell.swift */,
 				D9C10BA8291589EB0065A55F /* Photo.swift */,
 				D9B8CAB5291505A900E80FC8 /* User.swift */,
+				D9FA99E329336230006A69C3 /* Checker.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -313,6 +316,7 @@
 				D9CCD45528AD1669002382BA /* PostViewController.swift in Sources */,
 				D9E2D44428AA8F0200C4C09B /* ViewController.swift in Sources */,
 				D918D98C28B5467700A11CA5 /* ProfileTableHederView.swift in Sources */,
+				D9FA99E429336230006A69C3 /* Checker.swift in Sources */,
 				D9C10BA9291589EB0065A55F /* Photo.swift in Sources */,
 				D92913252915896D00124D96 /* ProfileViewController.swift in Sources */,
 				D9E2D44828AA911000C4C09B /* FeedViewController.swift in Sources */,
