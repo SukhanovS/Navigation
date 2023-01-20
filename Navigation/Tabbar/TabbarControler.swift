@@ -18,8 +18,14 @@ class TabBarController: UITabBarController {
     }
     
     private func setupUI() {
+        
+        let loginVC = LoginViewController()
+        //lvc.loginDelegate = LoginInspector() // делаем зависимость LoginViewController от LoginInspector (задание 1)
+        loginVC.loginDelegate = MyLoginFactory().makeLoginInspector() // делаем зависимость LoginViewController от LoginInspector() (задание 2)
+        
         firstTabNavigationController = UINavigationController.init(rootViewController: FeedViewController())
-        secondTabNavigationControoller = UINavigationController.init(rootViewController: LoginViewController())
+        secondTabNavigationControoller = UINavigationController.init(rootViewController: loginVC)
+        
         
         self.viewControllers = [firstTabNavigationController, secondTabNavigationControoller]
         

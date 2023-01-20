@@ -81,6 +81,19 @@ class LoginViewController: UIViewController {
         return stackView
     }()
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.navigationController?.navigationBar.isHidden = true
+        self.setupGestures()
+        view.backgroundColor = .white
+        addViews()
+        addConstraints()
+        
+        alertController.addAction(UIAlertAction(title: "Повторить", style: .default))
+    
+        
+    }
+    
     func addConstraints() {
         NSLayoutConstraint.activate([
             
@@ -121,18 +134,7 @@ class LoginViewController: UIViewController {
         ])
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.navigationController?.navigationBar.isHidden = true
-        self.setupGestures()
-        view.backgroundColor = .white
-        addViews()
-        addConstraints()
-        
-        alertController.addAction(UIAlertAction(title: "Повторить", style: .default))
-    
-        
-    }
+   
     
     func addViews() {
         view.addSubview(scrollView)

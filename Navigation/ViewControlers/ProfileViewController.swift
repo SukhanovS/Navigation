@@ -16,7 +16,6 @@ class ProfileViewController: UIViewController{
     
     lazy private var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
-        
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.delegate = self
         tableView.dataSource = self

@@ -8,9 +8,7 @@
 import Foundation
 import UIKit
 
-protocol UserService {
-    func checkUser (login: String) -> User?
-}
+
 
 class User {
     
