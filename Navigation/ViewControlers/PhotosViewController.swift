@@ -10,14 +10,15 @@ import UIKit
 import iOSIntPackage
 
 class PhotosViewController : UIViewController, ImageLibrarySubscriber {
-  
-//    для реализации заполнения
+    
+    //    для реализации заполнения
     var itemInSection : Int = 0
     var itemImageMassive : [UIImage] = []
     var imagePublisher = ImagePublisherFacade()
     
     
-
+    
+    
     private lazy var layout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -26,7 +27,7 @@ class PhotosViewController : UIViewController, ImageLibrarySubscriber {
         layout.sectionInset = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)
         return layout
     }()
-
+    
     private lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: self.layout)
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "DefaultCell")
@@ -36,14 +37,14 @@ class PhotosViewController : UIViewController, ImageLibrarySubscriber {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.isHidden = false
         self.title = "Photo Gallery"
-
+        
         view.backgroundColor = .white
-
+        
         addViews()
         addConstraints()
         
@@ -51,13 +52,13 @@ class PhotosViewController : UIViewController, ImageLibrarySubscriber {
         imagePublisher.subscribe(self)
         imagePublisher.addImagesWithTimer(time: 0.5, repeat: 20)
     }
-
+    
     func addViews(){
         view.addSubview(collectionView)
     }
     
     // отписываемся от наблюдения при смене статус контроллера или нажатии кнопки back
-
+    
     override func didMove(toParent parent: UIViewController?) {
         super.didMove(toParent: parent)
         if parent == nil {
@@ -65,7 +66,7 @@ class PhotosViewController : UIViewController, ImageLibrarySubscriber {
             imagePublisher.rechargeImageLibrary()
         }
     }
-
+    
     func addConstraints(){
         NSLayoutConstraint.activate([
             self.collectionView.topAnchor.constraint(equalTo: self.view.topAnchor),
@@ -74,30 +75,30 @@ class PhotosViewController : UIViewController, ImageLibrarySubscriber {
             self.collectionView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
         ])
     }
-
+    
 }
 
 extension PhotosViewController : UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return itemInSection
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-
+        
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CustomCell", for: indexPath) as? PhotosCollectionViewCell else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DefaultCell", for: indexPath)
             return cell
         }
-
+        
         cell.setup(with: "\(itamData[indexPath.row])")
-
+        
         return cell
     }
 }
 
 extension PhotosViewController : UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-
+        
         return CGSize(width: itemSizeInCollection, height: itemSizeInCollection)
     }
 }
