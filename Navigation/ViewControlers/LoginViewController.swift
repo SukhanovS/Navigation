@@ -57,16 +57,7 @@ class LoginViewController: UIViewController {
         return password
     }()
     
-    lazy private var button: UIButton = {
-        let button = UIButton()
-        button.setTitle("Log In", for: .normal)
-        button.setTitleColor(UIColor.white, for: .normal)
-        button.backgroundColor = UIColor(patternImage: UIImage(named: "blue_pixel.png")!)
-        button.layer.cornerRadius = 10
-        button.addTarget(self, action: #selector(login), for: .touchUpInside)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
+    lazy private var button: CustomButton = CustomButton(title: "Log In", backgroundColor: UIColor(patternImage: UIImage(named: "blue_pixel.png")!), cornerRadius: 10)
     
     lazy private var stackView: UIStackView = {
         let stackView = UIStackView()
@@ -88,6 +79,7 @@ class LoginViewController: UIViewController {
         view.backgroundColor = .white
         addViews()
         addConstraints()
+        login()
         
         alertController.addAction(UIAlertAction(title: "Повторить", style: .default))
     
@@ -152,24 +144,27 @@ class LoginViewController: UIViewController {
     
     //нажатие кнопки логин
     @objc func login() {
-
-        // берем то что вводит пользователь в поле "email"
-        let enteredUserLogin = email.text
-        let enteredUserPassword = password.text
-
-        // если мы в дебаг версии то меняем цвет фона, иначе оставляем все как было
-        #if DEBUG
-        let userLogin = TestUserService(user: User(fullName: "Test", status: "...", avatar: UIImage(named: "avatarTest") ?? UIImage()))
-        #else
+        
+        button.buttonAction = {
+            
+            // берем то что вводит пользователь в поле "email"
+            let enteredUserLogin = self.email.text
+            let enteredUserPassword = self.password.text
+            
+            // если мы в дебаг версии то меняем цвет фона, иначе оставляем все как было
+#if DEBUG
+            let userLogin = TestUserService(user: User(fullName: "Test", status: "...", avatar: UIImage(named: "avatarTest") ?? UIImage()))
+#else
             let userLogin = CurrentUserService(user: User(fullname: "Prod", avatar: UIImage(named: "avatarProd") ?? UIImage(), status: "App Not Found..."))
-        #endif
-
-        if loginDelegate?.check(self, login: enteredUserLogin ?? "", password: enteredUserPassword ?? "") == true {
-            let profileViewController = ProfileViewController()
-            profileViewController.user_1 = userLogin.user
-            navigationController?.pushViewController(profileViewController, animated: true)
-        } else {
-            self.present(alertController, animated: true, completion: nil)
+#endif
+            
+            if self.loginDelegate?.check(self, login: enteredUserLogin ?? "", password: enteredUserPassword ?? "") == true {
+                let profileViewController = ProfileViewController()
+                profileViewController.user_1 = userLogin.user
+                self.navigationController?.pushViewController(profileViewController, animated: true)
+            } else {
+                self.present(self.alertController, animated: true, completion: nil)
+            }
         }
     }
 
